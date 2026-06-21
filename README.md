@@ -1,16 +1,90 @@
-# React + Vite
+# AI-Powered Chess Learning Platform ♟️
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+An interactive chess learning platform designed to help players improve through visualization, game analysis, and AI-assisted learning tools.
 
-Currently, two official plugins are available:
+🚧 **Project Status: Active Development**
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+## Overview
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+This project aims to combine modern web technologies with chess training tools to create an engaging learning experience for players of all skill levels.
 
-## Expanding the ESLint configuration
+The platform is being built with a focus on interactive gameplay, move analysis, and future engine-assisted learning features.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## Current Features
+
+* Interactive chessboard interface
+* Chess piece rendering
+* Standard starting position setup
+* Piece movement functionality
+* Responsive user interface
+* React-based state management
+
+---
+
+## Features Under Development
+
+* Legal move validation
+* Check and checkmate detection
+* Move history tracking
+* PGN import/export support
+* Position analysis
+* Stockfish engine integration
+* AI-assisted learning recommendations
+
+---
+
+## Tech Stack
+
+### Frontend
+
+* React.js
+* JavaScript (ES6+)
+* Tailwind CSS
+* Vite
+
+### Development Tools
+
+* Git
+* GitHub
+* VS Code
+
+---
+
+## Project Goals
+
+The long-term goal of this project is to build a comprehensive chess learning platform that helps players:
+
+* Analyze games effectively
+* Understand mistakes and inaccuracies
+* Learn positional and tactical concepts
+* Improve through engine-assisted feedback
+* Track learning progress over time
+
+---
+
+## Development Progress
+
+| Feature                    | Status         |
+| -------------------------- | -------------- |
+| Chessboard Rendering       | ✅ Completed    |
+| Piece Placement            | ✅ Completed    |
+| Piece Movement             | ✅ Completed    |
+| Move Validation            | 🔄 In Progress |
+| Chess Rules Implementation | 🔄 In Progress |
+| Position Analysis          | ⏳ Planned      |
+| Stockfish Integration      | ⏳ Planned      |
+| AI Learning Features       | ⏳ Planned      |
+
+---
+
+## Author
+
+**Saransh Verma**
+
+B.Tech Computer Science & Engineering (Data Science)
+
+Manipal University Jaipur
