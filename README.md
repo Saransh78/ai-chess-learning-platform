@@ -4,6 +4,12 @@ An interactive chess learning platform designed to help players improve through 
 
 🚧 **Project Status: Active Development**
 
+## Project Preview
+
+### Current Chessboard
+
+![Chess Board](screenshots/board.png)
+
 ---
 
 ## Overview
@@ -81,10 +87,8 @@ The long-term goal of this project is to build a comprehensive chess learning pl
 
 ---
 
-## Author
+## Developed By
 
-**Saransh Verma**
-
-B.Tech Computer Science & Engineering (Data Science)
-
+**Saransh Verma**  
+Computer Science & Engineering (Data Science)  
 Manipal University Jaipur
