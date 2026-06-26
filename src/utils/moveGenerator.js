@@ -121,7 +121,57 @@ if (
   
   return moves;
 }
+function getRookMoves(piece, boardPieces) {
+  const moves = [];
+  const rookDirections = [
+  [-1, 0], // Up
+  [1, 0],  // Down
+  [0, -1], // Left
+  [0, 1],  // Right
+  ];
+  for (const [rowDirection, colDirection] of rookDirections) {
+    let currentRow = piece.row + rowDirection;
+    let currentCol = piece.col + colDirection;
+    while (
+  currentRow >= 0 &&
+  currentRow <= 7 &&
+  currentCol >= 0 &&
+  currentCol <= 7
+        ){
+           const destinationPiece = getPieceAt(
+  currentRow,
+  currentCol,
+  boardPieces
+);
 
+if (!destinationPiece) {
+  moves.push({
+    row: currentRow,
+    col: currentCol,
+  });
+
+  currentRow += rowDirection;
+  currentCol += colDirection;
+}
+
+else if (destinationPiece.color !== piece.color) {
+  moves.push({
+    row: currentRow,
+    col: currentCol,
+  });
+
+  break;
+}
+
+else {
+  break;
+}
+        }
+  }  
+
+
+  return moves;
+}
 export function getLegalMoves(piece, boardPieces) {
   switch (piece.type) {
     case "pawn":
@@ -129,6 +179,9 @@ export function getLegalMoves(piece, boardPieces) {
 
      case "knight":
       return getKnightMoves(piece, boardPieces);
+
+    case "rook":
+    return getRookMoves(piece, boardPieces);
 
     default:
       return [];
