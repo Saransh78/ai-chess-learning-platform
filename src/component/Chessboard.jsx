@@ -2,6 +2,10 @@ import { useState } from "react";
 import { pieces } from "../data/startingPosition";
 import { pieceImages } from "../data/pieceImages";
 import { getLegalMoves } from "../utils/moveGenerator" 
+import {
+  isKingInCheck,
+  isMoveLegal,
+} from "../utils/gameRules";
 
 export default function Chessboard() {
   const [boardPieces, setBoardPieces] = useState(pieces);
@@ -76,7 +80,9 @@ else if (
   setLegalMoves(getLegalMoves(piece, boardPieces));
 }
 
-else if (isLegalDestination) {
+else if (isLegalDestination)
+
+{
   let piecesAfterCapture = boardPieces;
 
   if (
@@ -104,6 +110,17 @@ else if (isLegalDestination) {
   });
 
   setBoardPieces(updatedPieces);
+  const whiteInCheck = isKingInCheck(
+  "white",
+  updatedPieces
+);
+
+const blackInCheck = isKingInCheck(
+  "black",
+  updatedPieces
+);
+console.log("White:", whiteInCheck);
+console.log("Black:", blackInCheck);
   setSelectedPiece(null);
   setLegalMoves([]);
   setCurrentTurn(
