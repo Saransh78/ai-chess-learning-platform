@@ -1,3 +1,9 @@
+function getPieceAt(row, col, boardPieces) {
+  return boardPieces.find(
+    (piece) => piece.row === row && piece.col === col
+  );
+}
+
 function getPawnMoves(piece, boardPieces) {
   const moves = [];
 
@@ -6,8 +12,10 @@ function getPawnMoves(piece, boardPieces) {
 
   const nextRow = piece.row + direction;
 
-  const pieceInFront = boardPieces.find(
-    (p) => p.row === nextRow && p.col === piece.col
+  const pieceInFront = getPieceAt(
+  nextRow,
+  piece.col,
+  boardPieces
   );
 
   if (!pieceInFront) {
@@ -19,8 +27,10 @@ function getPawnMoves(piece, boardPieces) {
 
   const twoStepsRow = piece.row + direction * 2;
 
-  const pieceTwoSquaresAhead = boardPieces.find(
-    (p) => p.row === twoStepsRow && p.col === piece.col
+  const pieceTwoSquaresAhead = getPieceAt(
+  twoStepsRow,
+  piece.col,
+  boardPieces
   );
 
   if (
@@ -43,18 +53,16 @@ const captureRight = {
   col: piece.col + 1,
 };
 
-const leftPiece = boardPieces.find(
-  (p) =>
-    p.row === captureLeft.row &&
-    p.col === captureLeft.col
+const leftPiece = getPieceAt(
+  captureLeft.row,
+  captureLeft.col,
+  boardPieces
 );
-
-const rightPiece = boardPieces.find(
-  (p) =>
-    p.row === captureRight.row &&
-    p.col === captureRight.col
+const rightPiece = getPieceAt(
+  captureRight.row,
+  captureRight.col,
+  boardPieces
 );
-
 if (
   leftPiece &&
   leftPiece.color !== piece.color
@@ -71,12 +79,56 @@ if (
 
   return moves;
 }
+function getKnightMoves(piece, boardPieces) {
+  const moves = [];
+  const knightOffsets = [
+  [-2, -1],
+  [-2, 1],
+  [2, -1],
+  [2, 1],
+  [-1, -2],
+  [-1, 2],
+  [1, -2],
+  [1, 2],
+];
+for (const [rowOffset, colOffset] of knightOffsets) {
+  const newRow = piece.row + rowOffset;
+  const newCol = piece.col + colOffset;
+  if (
+  newRow < 0 ||
+  newRow > 7 ||
+  newCol < 0 ||
+  newCol > 7
+) {
+  continue;
+}
+const destinationPiece = getPieceAt(
+  newRow,
+  newCol,
+  boardPieces
+);
+if (
+  !destinationPiece ||
+  destinationPiece.color !== piece.color
+) {
+  moves.push({
+    row: newRow,
+    col: newCol,
+  });
+}
 
+}
+  
+  return moves;
+}
 
 export function getLegalMoves(piece, boardPieces) {
   switch (piece.type) {
     case "pawn":
-      return getPawnMoves(piece, boardPieces);
+      return getPawnMoves(piece, boardPieces); 
+
+     case "knight":
+      return getKnightMoves(piece, boardPieces);
 
     default:
       return [];
