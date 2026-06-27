@@ -22,6 +22,7 @@ export default function Chessboard({
   const [lastMove, setLastMove] = useState(null);
   const [promotionPawn, setPromotionPawn] = useState(null);
   const [promotionSquare, setPromotionSquare] = useState(null);
+  const [isFlipped, setIsFlipped] = useState(false);
 function isLegalSquare(row, col) {
     return legalMoves.some(
       (move) => move.row === row && move.col === col
@@ -86,11 +87,27 @@ setPromotionSquare(null);
 setCurrentTurn(opponent);
   }
 console.log(selectedPiece);
+const rankLabels = isFlipped
+  ? [1,2,3,4,5,6,7,8]
+  : [8,7,6,5,4,3,2,1];
+
+const fileLabels = isFlipped
+  ? "hgfedcba".split("")
+  : "abcdefgh".split("");
   return (
     <div>
-    <h2 className="text-xl font-semibold mb-3">
-  Turn: {currentTurn}
-</h2>
+<div className="flex justify-between items-center mb-3">
+  <h2 className="text-xl font-semibold">
+    Turn: {currentTurn}
+  </h2>
+
+  <button
+    onClick={() => setIsFlipped(!isFlipped)}
+    className="bg-zinc-700 hover:bg-zinc-600 px-4 py-2 rounded-lg text-white"
+  >
+    Flip Board
+  </button>
+</div>
 {gameOver && (
   <h3 className="text-2xl font-bold text-green-400 mb-3">
     {gameResult}
@@ -98,21 +115,25 @@ console.log(selectedPiece);
 )}
     <div className="flex gap-2">
         <div className="flex flex-col h-[600px]">
-        {
-            [8,7,6,5,4,3,2,1].map((Number) => (
-                <div key={Number} className="flex-1 text-center">
-                    {Number}
-                </div>
-            ))
-        }
+        
+                {rankLabels.map((number) => (
+  <div key={number} className="flex-1 text-center">
+    {number}
+  </div>
+))}
 
 
       </div>
       <div>
     <div className="grid grid-cols-8 grid-rows-8 w-[600px] h-[600px] border">
   {Array.from({ length: 64 }).map((_, index) => {
-    const row = Math.floor(index / 8);
-    const col = index % 8;
+    let row = Math.floor(index / 8);
+let col = index % 8;
+
+if (isFlipped) {
+  row = 7 - row;
+  col = 7 - col;
+}
 
     const piece = boardPieces.find(
   (p) => p.row === row && p.col === col
@@ -348,16 +369,15 @@ className={`${
   })}
 </div>
 <div className="flex w-[600px]">
-  {"abcdefgh".split("").map((letter) => (
+  {fileLabels.map((letter) => (
     <div
       key={letter}
       className="flex-1 text-center text-white"
     >
       {letter}
     </div>
-
   ))}
-  </div>
+</div>
 
 </div>
     </div>
