@@ -112,6 +112,45 @@ export function isMoveLegal(
   destinationCol,
   boardPieces
 ) {
+  const isCastling =
+  selectedPiece.type === "king" &&
+  Math.abs(destinationCol - selectedPiece.col) === 2;
+  if (
+  isCastling &&
+  isKingInCheck(
+    selectedPiece.color,
+    boardPieces
+  )
+) {
+  return false;
+}
+if (isCastling) {
+  const middleCol =
+  selectedPiece.col +
+  (destinationCol > selectedPiece.col ? 1 : -1);
+  let middleBoard = boardPieces.map((piece) => {
+  if (
+    piece.row === selectedPiece.row &&
+    piece.col === selectedPiece.col
+  ) {
+    return {
+      ...piece,
+      col: middleCol,
+    };
+  }
+
+  return piece;
+});
+if (
+  isKingInCheck(
+    selectedPiece.color,
+    middleBoard
+  )
+) {
+  return false;
+}
+
+}
     let simulatedBoard = [...boardPieces];
     // Remove captured piece
   simulatedBoard = simulatedBoard.filter(

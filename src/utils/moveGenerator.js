@@ -346,6 +346,78 @@ if (
   });
 }
 
+
+}
+// Kingside castling
+if (!piece.hasMoved) {
+  const rook = boardPieces.find(
+  (p) =>
+    p.type === "rook" &&
+    p.color === piece.color &&
+    p.row === piece.row &&
+    p.col === 7
+);
+if (rook && !rook.hasMoved) {
+  const square1 = getPieceAt(
+  piece.row,
+  piece.col + 1,
+  boardPieces
+);
+
+const square2 = getPieceAt(
+  piece.row,
+  piece.col + 2,
+  boardPieces
+);
+if (!square1 && !square2) {
+  moves.push({
+  row: piece.row,
+  col: piece.col + 2,
+});
+
+}
+}
+}
+// Queenside castling
+if (!piece.hasMoved) {
+  const rook = boardPieces.find(
+  (p) =>
+    p.type === "rook" &&
+    p.color === piece.color &&
+    p.row === piece.row &&
+    p.col === 0
+);
+if (rook && !rook.hasMoved) {
+  const square1 = getPieceAt(
+  piece.row,
+  piece.col - 1,
+  boardPieces
+);
+
+const square2 = getPieceAt(
+  piece.row,
+  piece.col - 2,
+  boardPieces
+);
+
+const square3 = getPieceAt(
+  piece.row,
+  piece.col - 3,
+  boardPieces
+);
+if (
+  !square1 &&
+  !square2 &&
+  !square3
+) {
+  moves.push({
+    row: piece.row,
+    col: piece.col - 2,
+  });
+}
+
+}
+
 }
   
   return moves;

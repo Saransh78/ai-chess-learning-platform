@@ -111,6 +111,9 @@ else if (
       (p) => !(p.row === row && p.col === col)
     );
   }
+  const isCastling =
+  selectedPiece.type === "king" &&
+  Math.abs(col - selectedPiece.col) === 2;
 
   const updatedPieces = piecesAfterCapture.map((p) => {
     if (
@@ -121,8 +124,37 @@ else if (
         ...p,
         row,
         col,
+        hasMoved: true,
       };
     }
+    if (
+  isCastling &&
+  p.type === "rook" &&
+  p.color === selectedPiece.color
+) {
+  const isKingSide = col > selectedPiece.col;
+  if (
+  isKingSide &&
+  p.col === 7
+) {
+  return {
+    ...p,
+    col: 5,
+    hasMoved: true,
+  };
+}
+if (
+  !isKingSide &&
+  p.col === 0
+) {
+  return {
+    ...p,
+    col: 3,
+    hasMoved: true,
+  };
+}
+
+}
 
     return p;
   });
